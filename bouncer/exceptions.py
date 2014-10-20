@@ -9,8 +9,8 @@ class AccessDenied(Exception):
     :param subject: The resource that the user was attempting to access.
     """
     
-    def __init__(self, user, action, target):
+    def __init__(self, user, action, subject):
         self.user = user
         self.action = action
-        self.target = target
+        self.subject = subject
 
