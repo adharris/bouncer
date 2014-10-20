@@ -38,7 +38,7 @@ def ensure(user, action, subject):
     """ Similar to ``can`` but will raise a AccessDenied Exception if does not have access"""
     ability = Ability(user, get_authorization_method())
     if ability.cannot(action, subject):
-        raise AccessDenied()
+        raise AccessDenied(user, action, subject)
 
 _authorization_method = None
 
