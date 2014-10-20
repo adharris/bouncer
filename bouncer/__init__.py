@@ -57,7 +57,7 @@ _authorization_target = None
 
 def authorization_target(original_class):
     """ Add bouncer goodness to the model.  This is a class decorator, when added to your User model if will add
-        ``can`` and ``cannot`` methods to the class
+        ``can``, ``cannot``, and ``ensure`` methods to the class
     :param original_class:  the User class to be decorated
     """
 
@@ -67,8 +67,13 @@ def authorization_target(original_class):
 
     def cannot(self, action, subject):
         return not can(self, action, subject)
+    
+    def _ensure(self, action, subject):
+        return ensure(self, action, subject)
 
     setattr(original_class, 'can', can)
     setattr(original_class, 'cannot', cannot)
+    setattr(original_class, 'ensure', _ensure)
 
     return original_class
+
